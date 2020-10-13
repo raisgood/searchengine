@@ -7,7 +7,7 @@ e.preventDefault();
 });
 
 function getMovies(searchText){
-axios.get('http://www.omdbapi.com/?s=tt3896198&apikey=387cdace')
+axios.get('http://www.omdbapi.com/?i=tt3896198&apikey=387cdace')
 .then((response) => {
 console.log(response);
 let movies = response.data.Search;
