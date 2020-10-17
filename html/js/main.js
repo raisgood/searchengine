@@ -1,27 +1,43 @@
 $(document).ready(() => {
-$('#searchForm').on('submit', (e) => {
-let searchText = $('#searchText').val();
-getMovies(searchText);
-e.preventDefault();
-});
+    $('#searchForm').submit( (e) => {
+        e.preventDefault();
+        let searchText = $('#searchText').val();
+        getMovies(searchText);
+    });
 });
 
 function getMovies(searchText){
-axios.get('http://www.omdbapi.com/?i=tt3896198&apikey=387cdace')
-.then((response) => {
-console.log(response);
-let movies = response.data.Search;
-let output = $.each(movies, (index, movie) => {
-output +=`
-<div class="col-md-3">
-<div class="well text-center">
-<img src="${movie.Poster}">
-<h5>${movie.Title}</h5>
-<a onclick="movieSelected('${movie.imdbID}')" class="btn btn-primary" href="#">Movie Details</a>
-</div>
-</div>
-`;
-});
+    var API_URL = `http://www.omdbapi.com/?s=${searchText}&apikey=387cdace`;  // 'http://www.omdbapi.com/?i=tt3896198&apikey=387cdace'
+    axios.get(API_URL)
+        .then((response) => {
+        console.log(response);
+        
+        let output = '';
+        let movies = response.data.Search;
+           $.each(movies, (index, movie) => {
+            output +=`
+            <div class="col-md-3">
+            <div class="well text-center">
+            <img src="${movie.Poster}">
+            <h5>${movie.Title}</h5>
+            <a onclick="movieSelected('${movie.imdbID}')" class="btn btn-primary" href="#">Movie Details</a>
+            </div>
+            </div>
+            `;
+        });
+        /*
+        let movie = response.data;
+        output +=`
+            <div class="col-md-3">
+            <div class="well text-center">
+            <img src="${movie.Poster}">
+            <h5>${movie.Title}</h5>
+            <a onclick="movieSelected('${movie.imdbID}')" class="btn btn-primary" href="#">Movie Details</a>
+            </div>
+            </div>
+            `;
+
+        */
 
 $('#movies').html(output);
 })
@@ -38,8 +54,8 @@ return true;
 
 function getMovie() {
 let movieId = sessionStorage.getItem('movieId');
-
-axios.get('http://www.omdbapi.com/?i=tt3896198&apikey=387cdace')
+var API_URL = `http://www.omdbapi.com/?s=${getMovie}&apikey=387cdace`;  // 'http://www.omdbapi.com/?i=tt3896198&apikey=387cdace'
+axios.get(API_URL)
 .then((response) => {
 console.log(response);
 let movie = response.data;
