@@ -45,7 +45,7 @@ function movieSelected(id) {
 
 function getMovie() {
   var movieId = sessionStorage.getItem('movieId');
-  var API_URL = "http://www.omdbapi.com/?s=".concat(getMovie, "&apikey=387cdace"); // 'http://www.omdbapi.com/?i=tt3896198&apikey=387cdace'
+  var API_URL = "http://www.omdbapi.com/?s=".concat(movieId, "&apikey=387cdace"); // 'http://www.omdbapi.com/?i=tt3896198&apikey=387cdace'
 
   axios.get(API_URL).then(function (response) {
     console.log(response);
