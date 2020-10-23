@@ -47,13 +47,13 @@ console.log(err);
 }
 
 function movieSelected(id) {
-sessionStorage.setItem('movieId', id);
+localStorage.setItem('movieId', id);
 window.location = 'movie.html';
 return true;
 }
 
 function getMovie() {
-let movieId = sessionStorage.getItem('searchText');
+let movieId = localStorage.getItem('searchText');
 var API_URL = `http://www.omdbapi.com/?s=${movieId}&apikey=387cdace`;  // 'http://www.omdbapi.com/?i=tt3896198&apikey=387cdace'
 axios.get(API_URL)
 .then((response) => {

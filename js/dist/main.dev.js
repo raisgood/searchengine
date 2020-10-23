@@ -38,13 +38,13 @@ function getMovies(searchText) {
 }
 
 function movieSelected(id) {
-  sessionStorage.setItem('movieId', id);
+  localStorage.setItem('movieId', id);
   window.location = 'movie.html';
   return true;
 }
 
 function getMovie() {
-  var movieId = sessionStorage.getItem('searchText');
+  var movieId = localStorage.getItem('searchText');
   var API_URL = "http://www.omdbapi.com/?s=".concat(movieId, "&apikey=387cdace"); // 'http://www.omdbapi.com/?i=tt3896198&apikey=387cdace'
 
   axios.get(API_URL).then(function (response) {
